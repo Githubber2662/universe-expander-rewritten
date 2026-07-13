@@ -4,25 +4,42 @@ var gameData = {
   upgrades: [],
   challenges: [], 
 };
-const UPGS = {
-    replicanti: {
-        cols: 4,
-        can(x) { return player.replicanti.gte(this[x].cost()) && (x == 2 ? !(CHALS.onChal("normal2") || CHALS.onChal("inf1")) : true) },
-        buy(x) {
-            if (this.can(x)) {
-                if (!ACHS.has(34)) player.replicanti = player.replicanti.div(this[x].cost()).max(1)
-                player.rep_upgs[x] = player.rep_upgs[x].add(1)
-            }
-        },
-        buyMax() {
-            for (let x = 1; x <= this.cols; x++) this.max(x)
-        },
-        max(x) {
-            if (this.can(x)) {
-                let bulk = this[x].bulk()
-                if (bulk.gt(player.rep_upgs[x])) {
-                    if (!ACHS.has(34)) player.replicanti = player.replicanti.div(this[x].cost(bulk.sub(1))).max(1)
-                    player.rep_upgs[x] = bulk
-                }
-            }
-        },
+class upgrade {
+  constructor(desc, id, currency, punishment, reward) {
+    this.desc = desc;
+    this.id = id;
+    this.currency = currency;
+    this.can = currency.gt(;
+    this.punishment = punishment;
+    this.reward = reward;
+    this.bought = new MetaNum(0);
+  }
+  buy() {
+    negEffect;
+  }
+}
+/*class ClassUnit {
+    constructor(name, baseCost, baseProduction, growthRate) {
+        this.name = name;
+        this.baseCost = baseCost;
+        this.baseProduction = baseProduction;
+        this.growthRate = growthRate; // e.g., 1.15
+        this.level = 0;
+    }
+
+    // Dynamic cost calculation based on exponential scaling
+    getCost() {
+        return Math.floor(this.baseCost * Math.pow(this.growthRate, this.level));
+    }
+
+    // Dynamic production calculation based on level
+    getProduction() {
+        return this.baseProduction * this.level;
+    }
+
+    // Standard upgrade logic (buy one)
+    upgrade() {
+        this.level++;
+    }
+}
+*/
