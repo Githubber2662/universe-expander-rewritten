@@ -3,8 +3,7 @@ var gameData = {
   multiplier: new MetaNum(1),
   penalty: new MetaNum(1),
   initialPenalty: new MetaNum(1),
-  upgrades: [],
-  challenges: [], 
+  inChallenge: [], 
 };
 
 // Upgrade Data
@@ -21,11 +20,27 @@ const upgrades = [
     {
         id: "slowdown",
         name: "Slower Slowdown",
-        baseCost: new MetaNum(100),
+        baseCost: new MetaNum(1.5),
         costMultiplier: new MetaNum(1.4),
         multBonus: new MetaNum(1),
         penaltyNerf: new MetaNum(1.05),
         count: new MetaNum(0)
+    }
+];
+const challenges = [
+    {
+        id: "slowdown",
+        name: "Slowdown",
+        goal: new MetaNum(10000),
+        penalty: new MetaNum(2),
+        completed: false,
+    },
+    {
+        id: "compaction",
+        name: "Slowdown",
+        goal: new MetaNum(10000),
+        penalty: new MetaNum(2),
+        completed: false,
     }
 ];
 
@@ -78,7 +93,7 @@ function buyUpgrade(upgradeId) {
 
 function updateMult() {
     gameData.multiplier = upgrades.reduce((product, u) => MetaNum.mul(product, MetaNum.pow(u.multBonus, u.count)), 1);
-    gameData.penalty = gameDataupgrades.reduce((product, u) => MetaNum.mul(product, MetaNum.pow(u.penaltyNerf, u.count)), 1);
+    gameData.initialPenalty = challenges.reduce((product, u) => MetaNum.mul(product, u.penlaty), 1);
 }
 
 /*// Game Loop (runs 10 times a second for smoothness)
