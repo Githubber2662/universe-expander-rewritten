@@ -39,7 +39,7 @@ const challenges = [
         id: "compaction",
         name: "Slowdown",
         goal: new MetaNum(10000),
-        penalty: new MetaNum(2),
+        penalty: MetaNum.add(1, MetaNum.log(size, 2)),
         completed: false,
     }
 ];
