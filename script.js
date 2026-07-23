@@ -95,6 +95,18 @@ function updateMult() {
     gameData.multiplier = upgrades.reduce((product, u) => MetaNum.mul(product, MetaNum.pow(u.multBonus, u.count)), 1);
     gameData.initialPenalty = challenges.reduce((product, u) => MetaNum.mul(product, u.penlaty), 1);
 }
+function format(num) {
+    if(typeof(num) == "number" || typeof(num) == "string" || Array.isArray(num))  {
+        var q = new MetaNum(num);
+        var r = new MetaNum(q).toJSON();
+        
+    }
+    else {
+        throw new Error("Parameter is invalid!");
+    }
+    
+}
+
 
 /*// Game Loop (runs 10 times a second for smoothness)
 setInterval(() => {
